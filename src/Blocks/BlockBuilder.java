@@ -1,10 +1,12 @@
 package Blocks;
+import java.awt.Color;
 
 public class BlockBuilder {
 	private double xco;
 	private double yco;
 	private double width;
 	private double height;
+	private Color color;
 	private boolean isGoal;
 	private boolean isDeadly;
 	private boolean isBouncy;
@@ -17,6 +19,7 @@ public class BlockBuilder {
 		this.yco = yco;
 		this.width = width;
 		this.height = height;
+		this.color = null;
 		isGoal = false;
 		isDeadly = false;
 		isBouncy = false;
@@ -36,6 +39,11 @@ public class BlockBuilder {
 	
 	public BlockBuilder bouncy() {
 		isBouncy = true;
+		return this;
+	}
+	
+	public BlockBuilder color(Color color) {
+		this.color = color;
 		return this;
 	}
 	
@@ -69,6 +77,10 @@ public class BlockBuilder {
 
 	public double getHeight() {
 		return height;
+	}
+	
+	public Color getColor() {
+		return color;
 	}
 
 	public boolean isGoal() {

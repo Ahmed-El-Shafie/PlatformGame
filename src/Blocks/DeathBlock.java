@@ -7,6 +7,9 @@ public class DeathBlock extends Block {
 	public DeathBlock(double levelWidth, double levelHeight, BlockBuilder blockBuilder) throws Exception {
 		super(levelWidth, levelHeight, blockBuilder);
 		color = Color.RED;
+		if (blockBuilder.getColor() != null) {
+			color = blockBuilder.getColor();
+		}
 	}
 
 }

@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -140,7 +141,44 @@ public class Game extends JFrame implements KeyListener {
 				.enableJumpDash()
 				.setBackgroundColor(new Color(50, 168, 82));
 		
-		levels = Arrays.asList(level1, level2, level3, level4, level5, level6ByLayla, level7, level8, level9);
+		List<BlockBuilder> blockBuilders = new ArrayList<>();
+		int goalBlockNumber = new Random().nextInt(3);
+		int[] xPositions = {19, 24, 29};
+		for (int i = 0; i < 3; i++) {
+			if (i == goalBlockNumber) {
+				blockBuilders.add(new BlockBuilder(xPositions[i], 7, 2, 2).goal());
+			} else {
+				blockBuilders.add(new BlockBuilder(xPositions[i], 7, 2, 2).deadly().color(Color.GREEN));
+			}
+		}
+		blockBuilders.addAll(Arrays.asList(
+			new BlockBuilder(0, 31, 40, 2),
+			new BlockBuilder(10, 38, 1, 2).deadly(),
+			new BlockBuilder(20, 37, 1, 3).deadly(),
+			new BlockBuilder(30, 39, 10, 1).deadly(),
+			new BlockBuilder(36, 37, 1, 1).portal(39, 30, 1, 1),
+			new BlockBuilder(15, 0, 1, 16),
+			new BlockBuilder(5, 30, 30, 1).deadly(),
+			new BlockBuilder(34, 25, 2, 1).bouncy(2),
+			new BlockBuilder(24, 24, 2, 1).bouncy(2),
+			new BlockBuilder(16, 23, 2, 1).bouncy(2),
+			new BlockBuilder(7, 22, 2, 1).bouncy(2),
+			new BlockBuilder(2, 30, 1, 1).portal(0, 2, 1, 1),
+			new BlockBuilder(14, 15, 1, 1).bouncy(8),
+			new BlockBuilder(20, 28, 2, 2).portal(39, 14, 1, 1),
+			new BlockBuilder(39, 6, 1, 1),
+			new BlockBuilder(36.5, 0.5, 1, 15.5).deadly(),
+			new BlockBuilder(33.5, 0.5, 1, 15.5).deadly(),
+			new BlockBuilder(35, 14, 1, 1).bouncy(8),
+			new BlockBuilder(37.5, 11, 1, 4).deadly(),
+			new BlockBuilder(16, 0, 1, 16),
+			new BlockBuilder(16, 15, 25, 1)));
+		
+		Level level10 = new Level(40, 40, blockBuilders)
+				.enableDoubleJump()
+				.setBackgroundColor(new Color(102, 153, 204));
+		
+		levels = Arrays.asList(level1, level2, level3, level4, level5, level6ByLayla, level7, level8, level9, level10);
 		this.setVisible(true);
 		addKeyListener(this);
 		currentLevelNumber = 0;
